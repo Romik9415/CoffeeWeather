@@ -26,5 +26,13 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
+
+    compile "io.reactivex.rxjava2:rxjava:2.1.0"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    compile "com.google.android.gms:play-services-location:11.4.0"
+    compile 'io.nlopez.smartlocation:library:3.3.2'
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    compile 'com.github.KwabenBerko:OpenWeatherMap-Android-Library:v1.1.1'
     testCompile 'junit:junit:4.12'
 }
