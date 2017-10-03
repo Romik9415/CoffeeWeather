@@ -19,12 +19,14 @@ git clone and build it or with Android Studio.. wait for it on Play Store!
 
  ![alt text](https://avatars1.githubusercontent.com/u/17787375?v=4&s=60)
  
-![alt text](https://lh5.googleusercontent.com/-bw0_I83PO3g/AAAAAAAAAAI/AAAAAAAAB4E/muN96M_Gpfs/photo.jpg?sz=48)
+![alt text](https://lh5.googleusercontent.com/-bw0_I83PO3g/AAAAAAAAAAI/AAAAAAAAB4E/muN96M_Gpfs/photo.jpg?sz=60)
  
 
   ![alt text](https://avatars0.githubusercontent.com/u/23013525?v=4&s=60)
-   ![alt text](https://avatars3.githubusercontent.com/u/23003411?v=4&s=60)
   
+  ![alt text](https://avatars3.githubusercontent.com/u/23003411?v=4&s=60)
+  
+  ![alt text](https://avatars0.githubusercontent.com/u/11440662?v=4&s=60)
 
 
  
