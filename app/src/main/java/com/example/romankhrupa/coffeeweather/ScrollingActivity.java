@@ -30,9 +30,12 @@ import com.kwabenaberko.openweathermaplib.implementation.OpenWeatherMapHelper;
 import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.sql.Array;
 import java.sql.Time;
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
@@ -51,6 +54,11 @@ public class ScrollingActivity extends AppCompatActivity {
     CollapsingToolbarLayout  mCollapsingToolbarLayout;
     TextView weather_description;
     ImageView weather_image_status;
+    //Sorry for hardcoding
+//    TextView weekday2 = (TextView)findViewById(R.id.day2);
+//    TextView weekday3 = (TextView)findViewById(R.id.day3);
+//    TextView weekday4 = (TextView)findViewById(R.id.day4);
+   // TextView weekday5 = (TextView)findViewById(R.id.day5);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,14 +70,14 @@ public class ScrollingActivity extends AppCompatActivity {
         mCollapsingToolbarLayout.setTitle("City"+" 0°C");
         weather_image_status = (ImageView)findViewById(R.id.weather_image_status);
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Updated ^-^", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 updateInfo();
+                getWeekday();
             }
         });
 
@@ -170,6 +178,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            sendNotification();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -178,9 +187,9 @@ public class ScrollingActivity extends AppCompatActivity {
     int notificationId = 0;
     void sendNotification(){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setSmallIcon(R.drawable.ic_stat_name)
+                        .setContentTitle("Weather updated")
+                        .setContentText(weather_description.getText().toString());
         Intent resultIntent = new Intent(this, ScrollingActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(ScrollingActivity.class);
@@ -193,4 +202,22 @@ public class ScrollingActivity extends AppCompatActivity {
         // mId allows you to update the notification later on.
         mNotificationManager.notify(notificationId, mBuilder.build());
     }
+
+    String getWeekday(){
+        Calendar sCalendar = Calendar.getInstance();
+        String weekday = new DateFormatSymbols().getWeekdays()[1];
+        Log.i("day",weekday);
+       // String dayLongName = sCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+       // String dayLongName = sCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+
+
+//        Log.i("calendar",dayLongName);
+//        //int currentTime = Calendar.getInstance().getTime().get;
+//        DateFormatSymbols dfs = new DateFormatSymbols();
+//        String[] weekdays = dfs.getWeekdays();
+//        Log.i("day",weekdays[days]);
+//        return weekdays[days];
+        return "d";
+    }
+
 }
