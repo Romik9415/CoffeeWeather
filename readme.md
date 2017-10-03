@@ -23,7 +23,7 @@ git clone and build it or with Android Studio.. wait for it on Play Store!
  
 
   ![alt text](https://avatars0.githubusercontent.com/u/23013525?v=4&s=60)
-   ![alt text](https://avatars3.githubusercontent.com/u/23003411?v=4&s=400)
+   ![alt text](https://avatars3.githubusercontent.com/u/23003411?v=4&s=60)
   
 
 
