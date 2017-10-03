@@ -5,7 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,12 +20,20 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kwabenaberko.openweathermaplib.Units;
 import com.kwabenaberko.openweathermaplib.implementation.OpenWeatherMapHelper;
 import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -38,15 +48,19 @@ public class ScrollingActivity extends AppCompatActivity {
 
     public final static String TAG = "ScrollingActivity";
     OpenWeatherMapHelper helper;
+    CollapsingToolbarLayout  mCollapsingToolbarLayout;
+    TextView weather_description;
+    ImageView weather_image_status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout  mCollapsingToolbarLayout =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mCollapsingToolbarLayout.setTitle("Lviv 23°C");
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        weather_description= (TextView) findViewById(R.id.weather_description);
+        mCollapsingToolbarLayout.setTitle("City"+" 0°C");
+        weather_image_status = (ImageView)findViewById(R.id.weather_image_status);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -92,7 +106,7 @@ public class ScrollingActivity extends AppCompatActivity {
         Log.e(TAG, "updateInfo");
         Location location = SmartLocation.with(this).location().getLastLocation();
         //TODO: insert this location ->
-        helper.getCurrentWeatherByGeoCoordinates(29, 49, new OpenWeatherMapHelper.CurrentWeatherCallback() {
+        helper.getCurrentWeatherByGeoCoordinates(location.getLatitude(), location.getLongitude(), new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
                 Log.e(TAG,
@@ -102,6 +116,10 @@ public class ScrollingActivity extends AppCompatActivity {
                                 +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
                                 +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
                 );
+                setCurrentWeatherInfo(currentWeather.getName(),
+                        currentWeather.getMain().getTemp(),
+                        currentWeather.getWeatherArray().get(0).getDescription(),
+                        currentWeather.getWind().getSpeed());
                 sendNotification();
             }
 
@@ -110,6 +128,30 @@ public class ScrollingActivity extends AppCompatActivity {
                 Log.v(TAG, throwable.getMessage());
             }
         });
+    }
+
+    private void setCurrentWeatherInfo(String cityName, Double temp, String description,Double windSpeed) {
+        mCollapsingToolbarLayout.setTitle(cityName+" "+String.valueOf(temp)+"°C");
+       // Log.i("Image_id",description.replaceAll(" ","_"));
+        //Log.i("Time",String.valueOf(currentTime.getHours()));
+        int currentTime = Calendar.getInstance().getTime().getHours();
+        String timeStatus;
+        if (currentTime>20||currentTime<6){
+            timeStatus = "night";
+        }
+        else{
+            timeStatus = "day";
+        }
+
+        Resources resources = getApplicationContext().getResources();
+        final int resourceId = resources.getIdentifier(
+                timeStatus+"_"+
+                description.replaceAll(" ", "_"),
+                "drawable", getApplicationContext().getPackageName());
+        weather_image_status.setImageResource(resourceId);
+        description = description.substring(0,1).toUpperCase() + description.substring(1);
+        weather_description.setText(description);
+
     }
 
     @Override

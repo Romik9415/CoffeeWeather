@@ -25,9 +25,19 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/weather_image_status"
                 android:layout_gravity="right|center"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/weather_storm_day"/>
+                android:src="@drawable/weather_none_available"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/weather_description"
+                android:textSize="20sp"
+                android:text="Description"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="70dp"
+                android:layout_gravity="left|bottom"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
