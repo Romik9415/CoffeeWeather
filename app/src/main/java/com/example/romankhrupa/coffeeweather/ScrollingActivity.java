@@ -140,93 +140,94 @@ public class ScrollingActivity extends AppCompatActivity {
         updateInfoFor5days(location);
     }
     private void updateInfoFor5days(Location location) {
-        helper.getThreeHourForecastByGeoCoordinates(location.getLatitude(), location.getLongitude(), new OpenWeatherMapHelper.ThreeHourForecastCallback() {
-            @Override
-            public void onSuccess(ThreeHourForecast threeHourForecast) {
-                Log.v(TAG,
-                        "City/Country: " + threeHourForecast.getCity().getName() + "/" + threeHourForecast.getCity().getCountry() + "\n"
-                                + "Forecast Array Count: " + threeHourForecast.getCnt() + "\n"
-                                //For this example, we are logging details of only the first forecast object in the forecasts array
-                                + "fff"+threeHourForecast.getThreeHourWeatherArray().get(1).getWeatherArray().get(0).getDescription()
-                                + "First Forecast Date Timestamp: " + threeHourForecast.getThreeHourWeatherArray().get(0).getDt() + "\n"
-                                + "First Forecast Weather Description: " + threeHourForecast.getThreeHourWeatherArray().get(0).getWeatherArray().get(0).getDescription() + "\n"
-                                + "First Forecast Max Temperature: " + threeHourForecast.getThreeHourWeatherArray().get(0).getMain().getTempMax() + "\n"
-                                + "First Forecast Wind Speed: " + threeHourForecast.getThreeHourWeatherArray().get(0).getWind().getSpeed() + "\n"
-                );
-                TextView wethearDiscription1 = findViewById(R.id.weather_description1);
-                TextView wethearDiscription2 = findViewById(R.id.weather_description2);
-                TextView wethearDiscription3 = findViewById(R.id.weather_description3);
-                TextView wethearDiscription4 = findViewById(R.id.weather_description4);
-                TextView wethearDiscription5 = findViewById(R.id.weather_description5);
+        if(location != null) {
+            helper.getThreeHourForecastByGeoCoordinates(location.getLatitude(), location.getLongitude(), new OpenWeatherMapHelper.ThreeHourForecastCallback() {
+                @Override
+                public void onSuccess(ThreeHourForecast threeHourForecast) {
+                    Log.v(TAG,
+                            "City/Country: " + threeHourForecast.getCity().getName() + "/" + threeHourForecast.getCity().getCountry() + "\n"
+                                    + "Forecast Array Count: " + threeHourForecast.getCnt() + "\n"
+                                    //For this example, we are logging details of only the first forecast object in the forecasts array
+                                    + "fff" + threeHourForecast.getThreeHourWeatherArray().get(1).getWeatherArray().get(0).getDescription()
+                                    + "First Forecast Date Timestamp: " + threeHourForecast.getThreeHourWeatherArray().get(0).getDt() + "\n"
+                                    + "First Forecast Weather Description: " + threeHourForecast.getThreeHourWeatherArray().get(0).getWeatherArray().get(0).getDescription() + "\n"
+                                    + "First Forecast Max Temperature: " + threeHourForecast.getThreeHourWeatherArray().get(0).getMain().getTempMax() + "\n"
+                                    + "First Forecast Wind Speed: " + threeHourForecast.getThreeHourWeatherArray().get(0).getWind().getSpeed() + "\n"
+                    );
+                    TextView wethearDiscription1 = findViewById(R.id.weather_description1);
+                    TextView wethearDiscription2 = findViewById(R.id.weather_description2);
+                    TextView wethearDiscription3 = findViewById(R.id.weather_description3);
+                    TextView wethearDiscription4 = findViewById(R.id.weather_description4);
+                    TextView wethearDiscription5 = findViewById(R.id.weather_description5);
 
-                TextView temp1 = findViewById(R.id.temp1);
-                TextView temp2 = findViewById(R.id.temp2);
-                TextView temp3 = findViewById(R.id.temp3);
-                TextView temp4 = findViewById(R.id.temp4);
-                TextView temp5 = findViewById(R.id.temp5);
+                    TextView temp1 = findViewById(R.id.temp1);
+                    TextView temp2 = findViewById(R.id.temp2);
+                    TextView temp3 = findViewById(R.id.temp3);
+                    TextView temp4 = findViewById(R.id.temp4);
+                    TextView temp5 = findViewById(R.id.temp5);
 
-                ImageView imageView1 = findViewById(R.id.weather_image_status1);
-                ImageView imageView2 = findViewById(R.id.weather_image_status2);
-                ImageView imageView3 = findViewById(R.id.weather_image_status3);
-                ImageView imageView4 = findViewById(R.id.weather_image_status4);
-                ImageView imageView5 = findViewById(R.id.weather_image_status5);
+                    ImageView imageView1 = findViewById(R.id.weather_image_status1);
+                    ImageView imageView2 = findViewById(R.id.weather_image_status2);
+                    ImageView imageView3 = findViewById(R.id.weather_image_status3);
+                    ImageView imageView4 = findViewById(R.id.weather_image_status4);
+                    ImageView imageView5 = findViewById(R.id.weather_image_status5);
 
 
-                wethearDiscription1.setText(threeHourForecast.getThreeHourWeatherArray().get(7).getWeatherArray().get(0).getDescription());
-                wethearDiscription2.setText(threeHourForecast.getThreeHourWeatherArray().get(15).getWeatherArray().get(0).getDescription());
-                wethearDiscription3.setText(threeHourForecast.getThreeHourWeatherArray().get(23).getWeatherArray().get(0).getDescription());
-                wethearDiscription4.setText(threeHourForecast.getThreeHourWeatherArray().get(31).getWeatherArray().get(0).getDescription());
-                wethearDiscription5.setText(threeHourForecast.getThreeHourWeatherArray().get(38).getWeatherArray().get(0).getDescription());
+                    wethearDiscription1.setText(threeHourForecast.getThreeHourWeatherArray().get(7).getWeatherArray().get(0).getDescription());
+                    wethearDiscription2.setText(threeHourForecast.getThreeHourWeatherArray().get(15).getWeatherArray().get(0).getDescription());
+                    wethearDiscription3.setText(threeHourForecast.getThreeHourWeatherArray().get(23).getWeatherArray().get(0).getDescription());
+                    wethearDiscription4.setText(threeHourForecast.getThreeHourWeatherArray().get(31).getWeatherArray().get(0).getDescription());
+                    wethearDiscription5.setText(threeHourForecast.getThreeHourWeatherArray().get(38).getWeatherArray().get(0).getDescription());
 
-                temp1.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(7).getMain().getTemp()+"°C"));
-                temp2.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(15).getMain().getTemp()+"°C"));
-                temp3.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(23).getMain().getTemp()+"°C"));
-                temp4.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(31).getMain().getTemp()+"°C"));
-                temp5.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(38).getMain().getTemp()+"°C"));
+                    temp1.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(7).getMain().getTemp() + "°C"));
+                    temp2.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(15).getMain().getTemp() + "°C"));
+                    temp3.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(23).getMain().getTemp() + "°C"));
+                    temp4.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(31).getMain().getTemp() + "°C"));
+                    temp5.setText(String.valueOf(threeHourForecast.getThreeHourWeatherArray().get(38).getMain().getTemp() + "°C"));
 
-                int currentTime = Calendar.getInstance().getTime().getHours();
-                String timeStatus;
-                if (currentTime>20||currentTime<6){
-                    timeStatus = "n";
+                    int currentTime = Calendar.getInstance().getTime().getHours();
+                    String timeStatus;
+                    if (currentTime > 20 || currentTime < 6) {
+                        timeStatus = "n";
+                    } else {
+                        timeStatus = "d";
+                    }
+                    Resources resources = getApplicationContext().getResources();
+
+                    final int resourceId1 = resources.getIdentifier(
+                            timeStatus +
+                                    threeHourForecast.getThreeHourWeatherArray().get(7).getWeatherArray().get(0).getIcon(),
+                            "drawable", getApplicationContext().getPackageName());
+                    imageView1.setImageResource(resourceId1);
+                    final int resourceId2 = resources.getIdentifier(
+                            timeStatus +
+                                    threeHourForecast.getThreeHourWeatherArray().get(15).getWeatherArray().get(0).getIcon(),
+                            "drawable", getApplicationContext().getPackageName());
+                    imageView2.setImageResource(resourceId2);
+                    final int resourceId3 = resources.getIdentifier(
+                            timeStatus +
+                                    threeHourForecast.getThreeHourWeatherArray().get(23).getWeatherArray().get(0).getIcon(),
+                            "drawable", getApplicationContext().getPackageName());
+                    imageView3.setImageResource(resourceId3);
+                    final int resourceId4 = resources.getIdentifier(
+                            timeStatus +
+                                    threeHourForecast.getThreeHourWeatherArray().get(31).getWeatherArray().get(0).getIcon(),
+                            "drawable", getApplicationContext().getPackageName());
+                    imageView4.setImageResource(resourceId4);
+                    final int resourceId = resources.getIdentifier(
+                            timeStatus +
+                                    threeHourForecast.getThreeHourWeatherArray().get(38).getWeatherArray().get(0).getIcon(),
+                            "drawable", getApplicationContext().getPackageName());
+                    imageView5.setImageResource(resourceId);
+
                 }
-                else{
-                    timeStatus = "d";
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Log.v(TAG, throwable.getMessage());
                 }
-                Resources resources = getApplicationContext().getResources();
-
-                final int resourceId1 = resources.getIdentifier(
-                                timeStatus+
-                                threeHourForecast.getThreeHourWeatherArray().get(7).getWeatherArray().get(0).getIcon(),
-                        "drawable", getApplicationContext().getPackageName());
-                imageView1.setImageResource(resourceId1);
-                final int resourceId2 = resources.getIdentifier(
-                        timeStatus+
-                                threeHourForecast.getThreeHourWeatherArray().get(15).getWeatherArray().get(0).getIcon(),
-                        "drawable", getApplicationContext().getPackageName());
-                imageView2.setImageResource(resourceId2);
-                final int resourceId3 = resources.getIdentifier(
-                        timeStatus+
-                                threeHourForecast.getThreeHourWeatherArray().get(23).getWeatherArray().get(0).getIcon(),
-                        "drawable", getApplicationContext().getPackageName());
-                imageView3.setImageResource(resourceId3);
-                final int resourceId4 = resources.getIdentifier(
-                        timeStatus+
-                                threeHourForecast.getThreeHourWeatherArray().get(31).getWeatherArray().get(0).getIcon(),
-                        "drawable", getApplicationContext().getPackageName());
-                imageView4.setImageResource(resourceId4);
-                final int resourceId = resources.getIdentifier(
-                        timeStatus+
-                                threeHourForecast.getThreeHourWeatherArray().get(38).getWeatherArray().get(0).getIcon(),
-                        "drawable", getApplicationContext().getPackageName());
-                imageView5.setImageResource(resourceId);
-
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                Log.v(TAG, throwable.getMessage());
-            }
-        });
+            });
+        }
     }
 
     private void setCurrentWeatherInfo(String cityName, Double temp, String description,String icon) {
